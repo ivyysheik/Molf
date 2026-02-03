@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System.Threading.Tasks;
 
 public class Ball : MonoBehaviour
 {
@@ -15,6 +17,8 @@ public class Ball : MonoBehaviour
    
    private bool isDragging = false;
    private bool inHole;
+    public int par;
+    public TMP_Text parText; 
 
    private void Update()
    {
@@ -53,15 +57,20 @@ private void DragChange(Vector2 pos)
 
 private void DragRelease(Vector2 pos)
 {
+       
+
     float distance = Vector2.Distance((Vector2)transform.position, pos);
     isDragging = false; 
     lr.positionCount = 0;
 
     if (distance < 0.1f) return;
 
+
     Vector2 dir = (Vector2)transform.position - pos;
-    rb.velocity = Vector2.ClampMagnitude(dir * power, maxPower); 
-}
+    rb.velocity = Vector2.ClampMagnitude(dir * power, maxPower);
+        par += 1;
+        parText.text = $"Par :" + par;
+    }
 
 
 
